@@ -60,4 +60,5 @@ Además de los comandos generales de Docker, en la Parte I se utilizaron los sig
     * **`docker login`**: Inicio de seción en Docker Hub.
     * **`docker push jarsdev/pf2-web:latest`**: Publicar la imagen en Docker Hub.
 
-  
+* **Enlace a Docker Hub:**
+   * https://hub.docker.com/r/jarsdev/pf2-web    
