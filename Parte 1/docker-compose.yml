@@ -1,0 +1,25 @@
+
+services:
+
+  web:  
+    build: ./docker/web
+    volumes:
+      - ./:/var/www/html/
+    ports:
+      - "80:80"
+
+  db:
+    image: mysql
+    volumes:
+      - db:/var/lib/mysql/
+    environment:
+      - MYSQL_ROOT_PASSWORD=rootpassword
+      - MYSQL_DATABASE=pf2
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=password
+    ports:
+      - "3306:3306"
+
+volumes:
+  db:
+
