@@ -90,3 +90,20 @@ El archivo `docker-compose.yml` configura el servicio web:
     
   * **Orquestación con Docker Compose:**
     * **`docker-compose up -d`**: Una vez definido el servicio web en el archivo `docker-compose.yml`, este comando se utilizó para crear y levantar el contenedor. 
+
+## Problemas y Soluciones Experimentados
+
+Durante la realización de este proyecto, se experimentaron los siguientes problemas y se aplicaron las siguientes soluciones:
+
+1.  **Problema:** Error "Fatal error: Uncaught Error: Class "mysqli" not found" al intentar conectar la aplicación PHP a la base de datos MySQL.
+
+    **Solución:** Este error indicaba que la extensión `mysqli` de PHP no estaba habilitada dentro del contenedor PHP. Para solucionarlo, se realizaron los siguientes pasos:
+    * Se creo el archivo `Dockerfile` y se agrego su ruta al archivo  `docker-compose.yml`.
+    * En `Dockerfile` fueron agregadas las acciones para instalar y habilitar la extensión mysqli.
+    
+2.  **Problema:** Error "tag does not exist" al intentar subir la imagen Docker a Docker Hub con el comando `docker push <usuario_dockerhub>/<repositorio>:latest`.
+
+    **Solución:** Este error ocurría porque la imagen local construida con `docker-compose build web` tenía un nombre diferente al que se intentaba subir a Docker Hub. Para solucionarlo:
+    * Se listaron las imágenes locales disponibles utilizando el comando `docker images` para identificar el nombre correcto de la imagen construida (en este caso, `pf2-web`).
+    * Se utilizó el comando `docker tag` para crear un nuevo tag para la imagen local, vinculándola al nombre del repositorio en Docker Hub con el formato `<usuario_dockerhub>/<repositorio>:<tag>`. El comando específico fue `docker tag pf2-web:latest <tu_usuario_dockerhub>/pf2-web:latest`.
+    * Después de etiquetar correctamente la imagen local con el nombre del repositorio remoto, el comando `docker push <tu_usuario_dockerhub>/pf2-web:latest` se ejecutó con éxito, subiendo la imagen a Docker Hub.
